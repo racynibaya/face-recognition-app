@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-
+// import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
-import Particles from 'react-tsparticles';
-import particleOptions from './components/Config/particlesConfig';
+import ParticlesConfig from './components/Config/ParticlesConfig';
 import './App.css';
+
+// const app = new Clarifai.App({
+//   apiKey: 'ddedab0c5dd94e1589aebfe97f4fadff',
+// });
 
 class App extends Component {
   constructor() {
@@ -20,16 +23,26 @@ class App extends Component {
     console.log(event.target.value);
   }
 
-  onButtonSubmit(url) {
+  onButtonSubmit() {
     console.log('Click');
 
-    // app.models.predict('ddedab0c5dd94e1589aebfe97f4fadff', url);
+    // app.models
+    //   .predict(
+    //     'ddedab0c5dd94e1589aebfe97f4fadff',
+    //     'https://unsplash.com/photos/J-JOGvnfgM8'
+    //   )
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .then(function (err) {
+    //     console.log(err);
+    //   });
   }
 
   render() {
     return (
       <div className='App'>
-        <Particles params={particleOptions} />
+        <ParticlesConfig />
         <Navigation />
         <Logo />
         <Rank />
