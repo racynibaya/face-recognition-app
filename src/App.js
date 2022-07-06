@@ -4,7 +4,7 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
-import ParticlesConfig from './components/Config/ParticlesConfig';
+import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground';
 import './App.css';
 
 // const app = new Clarifai.App({
@@ -42,7 +42,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <ParticlesConfig />
+        <ParticlesBackground />
         <Navigation />
         <Logo />
         <Rank />

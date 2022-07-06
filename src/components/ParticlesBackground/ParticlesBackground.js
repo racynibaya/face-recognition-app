@@ -2,7 +2,7 @@ import React from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
-const ParticlesConfig = () => {
+const ParticlesBackground = () => {
   const particlesInit = async main => {
     console.log(main);
 
@@ -20,7 +20,7 @@ const ParticlesConfig = () => {
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
-        fpsLimit: 80,
+        fpsLimit: 120,
         interactivity: {
           events: {
             onClick: {
@@ -64,7 +64,7 @@ const ParticlesConfig = () => {
               default: 'bounce',
             },
             random: false,
-            speed: 4,
+            speed: 2.5,
             straight: false,
           },
           number: {
@@ -90,4 +90,4 @@ const ParticlesConfig = () => {
   );
 };
 
-export default ParticlesConfig;
+export default ParticlesBackground;
