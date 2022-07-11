@@ -344,7 +344,7 @@ const config = {
       },
       random: false,
       size: false,
-      speed: 2,
+      speed: 1.5,
       spin: {
         acceleration: 0,
         enable: false,
@@ -367,7 +367,7 @@ const config = {
         factor: 1000,
       },
       limit: 0,
-      value: 200,
+      value: 120,
     },
     opacity: {
       random: {
