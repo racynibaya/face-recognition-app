@@ -173,10 +173,6 @@ const config = {
   manualParticles: [],
   motion: {
     disable: false,
-    reduce: {
-      factor: 4,
-      value: true,
-    },
   },
   particles: {
     bounce: {
@@ -371,7 +367,7 @@ const config = {
         factor: 1000,
       },
       limit: 0,
-      value: 100,
+      value: 200,
     },
     opacity: {
       random: {
@@ -443,7 +439,7 @@ const config = {
       },
       value: {
         min: 1,
-        max: 5,
+        max: 3,
       },
       animation: {
         count: 0,
