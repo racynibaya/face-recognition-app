@@ -6,6 +6,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+
 import './App.css';
 
 const app = new Clarifai.App({

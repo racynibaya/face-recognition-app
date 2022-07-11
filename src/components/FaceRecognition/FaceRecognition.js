@@ -2,7 +2,6 @@ import React from 'react';
 import './FaceRecognition.css';
 
 const FaceRecognition = ({ imageUrl, box }) => {
-  console.log(box);
   let state = 'visible';
   if (imageUrl.length <= 0) {
     state = 'hidden';
@@ -22,6 +21,7 @@ const FaceRecognition = ({ imageUrl, box }) => {
         <div
           className='bounding-box'
           style={{
+            position: 'absolute',
             top: box.topRow,
             left: box.leftCol,
             right: box.rightCol,
