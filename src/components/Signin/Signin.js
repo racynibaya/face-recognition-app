@@ -2,6 +2,7 @@ import React from 'react';
 
 const Signin = ({ onRouteChange }) => {
   return (
+    // This is a tachyons form
     <article className='br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center'>
       <main className='pa4 black-80'>
         <form className='measure'>
@@ -40,9 +41,8 @@ const Signin = ({ onRouteChange }) => {
           </div>
           <div className='lh-copy mt3'>
             <p
-              style={{ cursor: 'pointer' }}
               onClick={() => onRouteChange('register')}
-              className='f6 link dim black db'
+              className='f6 link dim black db pointer'
             >
               Register
             </p>
