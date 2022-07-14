@@ -16,6 +16,6 @@
   z-index: -1;
 }
 
-article {
-  background-color: rgb(241 245 249);
+.card {
+  background-color: #fff;
 }
