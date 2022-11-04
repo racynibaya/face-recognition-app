@@ -4,7 +4,8 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
-import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground';
+// import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground';
+import ParticlesBg from 'particles-bg';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
@@ -25,6 +26,13 @@ class App extends Component {
       route: 'signin',
       isSignedIn: false,
     };
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:8000')
+      .then(response => response.json())
+      .then(console.log)
+      .catch(err => console.log(err));
   }
 
   calculateFaceLocation = data => {
@@ -73,12 +81,13 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <ParticlesBackground />
+        {/* "color" "ball" "lines" "thick" "circle" "cobweb" "polygon" "square"
+        "tadpole" "fountain" "random" "custom" */}
+        <ParticlesBg type='circle' bg={true} />
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
         />
-
         {route === 'home' ? (
           <div>
             <Logo />
