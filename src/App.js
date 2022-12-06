@@ -6,6 +6,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 // import ParticlesBackground from './components/ParticlesBackground/ParticlesBackground';
 import ParticlesBg from 'particles-bg';
+import MouseParticles from 'react-mouse-particles';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
@@ -36,12 +37,12 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch('http://localhost:8000')
-      .then(response => response.json())
-      .then(console.log)
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   fetch('http://localhost:8000')
+  //     .then(response => response.json())
+  //     .then(console.log)
+  //     .catch(err => console.log(err));
+  // }
 
   calculateFaceLocation = data => {
     const coordinates =
@@ -68,12 +69,26 @@ class App extends Component {
     this.setState({ input: event.target.value });
   };
 
-  onButtonSubmit = () => {
+  onImageSubmit = () => {
     this.setState({ imageURL: this.state.input });
 
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then(response => this.displayBox(this.calculateFaceLocation(response)))
+      .then(response => {
+        if (response)
+          fetch('http://localhost:8000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            }),
+          })
+            .then(res => res.json())
+            .then(count =>
+              this.setState(Object.assign(this.state.user, { entries: count }))
+            );
+        this.displayBox(this.calculateFaceLocation(response));
+      })
       .catch(err => console.error('Enter a valid URL', err.message));
   };
 
@@ -104,7 +119,8 @@ class App extends Component {
       <div className='App'>
         {/* "color" "ball" "lines" "thick" "circle" "cobweb" "polygon" "square"
         "tadpole" "fountain" "random" "custom" */}
-        <ParticlesBg type='circle' bg={true} />
+        <ParticlesBg type='cobweb' num={210} color='#ffffff' bg={true} />
+        <MouseParticles g={1} color='random' cull='col,image-wrapper' />
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
@@ -118,7 +134,7 @@ class App extends Component {
             />
             <ImageLinkForm
               onInputChange={this.onInputChange}
-              onButtonSubmit={this.onButtonSubmit}
+              onImageSubmit={this.onImageSubmit}
             />
             <FaceRecognition box={box} imageUrl={imageURL} />
           </div>

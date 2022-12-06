@@ -34,6 +34,7 @@ class Register extends Component {
     })
       .then(res => res.json())
       .then(user => {
+        if (user === 'Something went wrong') return alert('Unable to register');
         if (user) {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
