@@ -64,6 +64,10 @@ class App extends Component {
     this.setState({ box });
   };
 
+  clearImage = () => {
+    this.setState({ imageURL: '' });
+  };
+
   // triggered when input text change
   onInputChange = event => {
     this.setState({ input: event.target.value });
@@ -89,7 +93,11 @@ class App extends Component {
             );
         this.displayBox(this.calculateFaceLocation(response));
       })
-      .catch(err => console.error('Enter a valid URL', err.message));
+      .catch(err => alert('Unable to fetch url'));
+
+    this.setState({ input: '' }, () => {
+      console.log(this.state);
+    });
   };
 
   onRouteChange = route => {
@@ -122,6 +130,7 @@ class App extends Component {
         <ParticlesBg type='cobweb' num={210} color='#ffffff' bg={true} />
         <MouseParticles g={1} color='random' cull='col,image-wrapper' />
         <Navigation
+          clearImage={this.clearImage}
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
         />
@@ -133,6 +142,7 @@ class App extends Component {
               entries={this.state.user.entries}
             />
             <ImageLinkForm
+              inputUrl={this.state.input}
               onInputChange={this.onInputChange}
               onImageSubmit={this.onImageSubmit}
             />
