@@ -32,7 +32,7 @@ class Signin extends Component {
           this.props.onRouteChange('home');
         } else {
           this.setState({ signInEmail: '', signInPassword: '' });
-          alert('Wrong combination');
+          alert(user);
         }
       })
       .catch(err => {

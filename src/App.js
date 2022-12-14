@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clarifai from 'clarifai';
+
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
@@ -12,10 +12,6 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 
 import './App.css';
-
-const app = new Clarifai.App({
-  apiKey: 'ddedab0c5dd94e1589aebfe97f4fadff',
-});
 
 class App extends Component {
   constructor() {
@@ -36,13 +32,6 @@ class App extends Component {
       },
     };
   }
-
-  // componentDidMount() {
-  //   fetch('http://localhost:8000')
-  //     .then(response => response.json())
-  //     .then(console.log)
-  //     .catch(err => console.log(err));
-  // }
 
   calculateFaceLocation = data => {
     const coordinates =
@@ -76,8 +65,12 @@ class App extends Component {
   onImageSubmit = () => {
     this.setState({ imageURL: this.state.input });
 
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch('http://localhost:8000/imageUrl', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input: this.state.input }),
+    })
+      .then(response => response.json())
       .then(response => {
         if (response)
           fetch('http://localhost:8000/image', {
@@ -90,14 +83,13 @@ class App extends Component {
             .then(res => res.json())
             .then(count =>
               this.setState(Object.assign(this.state.user, { entries: count }))
-            );
+            )
+            .catch(err => console.log(err));
         this.displayBox(this.calculateFaceLocation(response));
       })
       .catch(err => alert('Unable to fetch url'));
 
-    this.setState({ input: '' }, () => {
-      console.log(this.state);
-    });
+    this.setState({ input: '' });
   };
 
   onRouteChange = route => {
